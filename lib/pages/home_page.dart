@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_to_do/components/dialog_box.dart';
 import 'package:hive_to_do/components/to_do_tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = TextEditingController();
   List toDolist = [
     ["Build App", false],
     ["Do Workout", false],
@@ -19,6 +21,28 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       toDolist[index][1] = !toDolist[index][1];
     });
+  }
+
+  void saveNewtask() {
+    setState(() {
+      toDolist.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
+  void createNewTask() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return DialogBox(
+            controller: _controller,
+            onSave: saveNewtask,
+            onCancel: () {
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 
   @override
@@ -33,9 +57,13 @@ class _HomePageState extends State<HomePage> {
 
       // Button for creating a task:
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () {
+          createNewTask();
+        },
         child: const Icon(Icons.add),
       ),
+
+      // Save button and cancel button.
 
       // Task List:
       body: ListView.builder(

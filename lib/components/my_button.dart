@@ -4,8 +4,9 @@ class MyButtons extends StatelessWidget {
   //Ignore imutable error
 
   final String buttonText;
-  VoidCallback onPressed;
-  MyButtons({super.key, required this.buttonText, required this.onPressed});
+  final VoidCallback onPressed;
+  const MyButtons(
+      {super.key, required this.buttonText, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

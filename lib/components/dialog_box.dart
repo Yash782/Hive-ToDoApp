@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_to_do/components/my_button.dart';
 
 class DialogBox extends StatelessWidget {
-  final controller;
-  VoidCallback onSave;
-  VoidCallback onCancel;
-  DialogBox(
+  final TextEditingController controller;
+  final VoidCallback onSave;
+  final VoidCallback onCancel;
+  const DialogBox(
       {super.key,
       required this.controller,
       required this.onSave,
@@ -15,7 +15,7 @@ class DialogBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.purple,
-      content: Container(
+      content: SizedBox(
         height: 150,
         child: Column(
           children: [
@@ -35,8 +35,8 @@ class DialogBox extends StatelessWidget {
                 // Cancel button
                 MyButtons(buttonText: "Cancel", onPressed: onCancel),
 
-                // Save button
-                MyButtons(buttonText: "Save", onPressed: onSave),
+                // Save task button
+                MyButtons(buttonText: "Add", onPressed: onSave),
               ],
             )
           ],
